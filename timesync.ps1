@@ -7,7 +7,7 @@ $DownloadURL = 'https://raw.githubusercontent.com/tamhq2/timesync/main/timesync2
 
 $rand = Get-Random -Maximum 1000
 $isAdmin = [bool]([Security.Principal.WindowsIdentity]::GetCurrent().Groups -match 'S-1-5-32-544')
-$FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\mnc_$rand.cmd" } else { "$env:TEMP\time_$rand.cmd" }
+$FilePath = if ($isAdmin) { "$env:SystemRoot\Temp\timesync2024_$rand.cmd" } else { "$env:TEMP\timesync2024_$rand.cmd" }
 
 try {
     $response = Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing
