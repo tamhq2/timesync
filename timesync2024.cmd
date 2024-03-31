@@ -55,34 +55,6 @@ if /i "%%A"=="-el"                    set _elev=1
 )
 )
 
-if defined _args echo "%_args%" | find /i "/" >nul && set _MASunattended=1
-::  Fix for the special characters limitation in path name
-
-set "_work=%~dp0"
-if "%_work:~-1%"=="\" set "_work=%_work:~0,-1%"
-
-set "_batf=%~f0"
-set "_batp=%_batf:'=''%"
-
-set _PSarg="""%~f0""" -el %_args%
-
-set "_ttemp=%temp%"
-
-setlocal EnableDelayedExpansion
-
-::========================================================================================================================================
-
-echo "!_batf!" | find /i "!_ttemp!" 1>nul && (
-if /i not "!_work!"=="!_ttemp!" (
-%nceline%
-echo Script is launched from the temp folder,
-echo Most likely you are running the script directly from the archive file.
-echo:
-echo Extract the archive file and launch the script from the extracted folder.
-goto MASend
-)
-)
-
 ::========================================================================================================================================
 
 ::  Elevate script as admin and pass arguments and preventing loop
@@ -94,11 +66,6 @@ echo This script require administrator privileges.
 echo To do so, right click on this script and select 'Run as administrator'.
 goto MASend
 )
-
-if not exist "%SystemRoot%\Temp\" mkdir "%SystemRoot%\Temp" 1>nul 2>nul
-mode 76, 30
-set "mastemp=%SystemRoot%\Temp\__MAS"
-if exist "%mastemp%\.*" rmdir /s /q "%mastemp%\" %nul%
 net stop w32time & w32tm /unregister && w32tm /register && powershell -exe bypass Restart-Service w32Time && w32tm /resync
 echo.
 echo.
